@@ -1,6 +1,6 @@
 package dk.au.ase.elektronik;
 
-public class MyFirstClass {
+public class MyFirstClass extends File_IO implements Runnable,MyInterface {
 	private String var;// = "Hello World!";
 	
 	public String convert(String input){
@@ -20,6 +20,11 @@ public class MyFirstClass {
 
 	public MyFirstClass(String var) {
 		super();
+		this.setVar(var);
+	}
+	
+	public MyFirstClass() {
+		super();
 		//this.setVar(var);
 	}
 
@@ -35,7 +40,7 @@ public class MyFirstClass {
 		if (var!="sgu"){
 			this.var = var;
 		}else{
-			System.out.print("Ikke bande!!!");
+			System.out.println("Ikke bande!!!");
 		}
 	}
 
@@ -43,8 +48,16 @@ public class MyFirstClass {
 		// TODO Auto-generated method stub
 		MyFirstClass v = new MyFirstClass("sgu");
 		String x = "!";//new String("!");
-		System.out.println(x=="!");
+		char[] c = new char[10];
+		
+		System.out.println(x =="!");
 		//System.out.println(v.convert("Hello World"));
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
