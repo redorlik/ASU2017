@@ -11,23 +11,28 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 
 public class TabGUI implements Runnable{
 
 	private JFrame frame;
 	private JTextField textField;
+	private JTextField textField_1;
 
 	/**
 	 * Launch the application.
+	 * @wbp.parser.entryPoint
 	 */
+	
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new TabGUI() {
-			
-		});
+		EventQueue.invokeLater(new TabGUI());
 	}
 
 	/**
 	 * Create the application.
+	 * @wbp.parser.entryPoint
 	 */
 	public TabGUI() {
 		initialize();
@@ -46,7 +51,10 @@ public class TabGUI implements Runnable{
 		frame.getContentPane().add(panel, BorderLayout.NORTH);
 		
 		Labelfieldbutton panel2 = new Labelfieldbutton("Ny drikkevare","Tilføj drikkevare");
+		
+		
 		frame.getContentPane().add(panel2, BorderLayout.SOUTH);
+		
 		
 		
 		
