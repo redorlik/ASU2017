@@ -25,22 +25,24 @@ public class DrinkTest {
 	public void tearDown() throws Exception {
 	}
 
-	@Test
-	public void test_create() {
+	@Test(expected=NegativePriceException.class)
+	public void test_create() throws NegativePriceException {
 		
 		assertNotNull(d);
 		assertEquals(d.getName(),"Vin");
 		assertEquals(d.getPrice(),45);
+		Drink na = new Drink("NN",-45);
+		
 	}
 	@Test
-	public void test_create2() {
+	public void test_create2() throws NegativePriceException {
 		Drink d = new Drink("Vin",new BigDecimal(45));
 		assertNotNull(d);
 		assertEquals(d.getName(),"Vin");
 		assertEquals(d.getPrice(),45);
 	}
-	@Test
-	public void testChangePrice() {
+	@Test(expected=NegativePriceException.class)
+	public void testChangePrice() throws NegativePriceException {
 		d.changePrice(145);
 		assertEquals(145,d.getPrice());
 		d.changePrice(-100);
