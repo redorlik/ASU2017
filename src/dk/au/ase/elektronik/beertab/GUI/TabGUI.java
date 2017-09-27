@@ -14,6 +14,8 @@ import javax.swing.JPanel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
 public class TabGUI implements Runnable{
 
@@ -54,6 +56,13 @@ public class TabGUI implements Runnable{
 		
 		
 		frame.getContentPane().add(panel2, BorderLayout.SOUTH);
+		
+		JMenu mnFile = new JMenu("File");
+		mnFile.setMnemonic('f');
+		frame.getContentPane().add(mnFile, BorderLayout.NORTH);
+		
+		JMenuItem menuItem = new JMenuItem("New menu item");
+		mnFile.add(menuItem);
 		
 		
 		
