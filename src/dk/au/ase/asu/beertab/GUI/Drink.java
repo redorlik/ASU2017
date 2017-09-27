@@ -8,12 +8,17 @@ public class Drink {
 
 	public Drink(String type, BigDecimal bigDecimal) {
 		this.type = type;
-		this.price = bigDecimal;
+		setPrice(bigDecimal);
 	}
 	
 	public Drink(String type2, int i) {
 		this.type = type2;
-		this.price = new BigDecimal(i);
+		setPrice(new BigDecimal(i));
+	}
+
+	private void setPrice(BigDecimal price) {
+		// TODO Auto-generated method stub
+		if (price.intValue()>0) this.price = price;
 	}
 
 	public int getPrice() {
@@ -26,5 +31,10 @@ public class Drink {
 	public String getName() {
 		// TODO Auto-generated method stub
 		return this.type;
+	}
+
+	public void changePrice(int i) {
+		// TODO Auto-generated method stub
+		setPrice( new BigDecimal(i));
 	}
 }

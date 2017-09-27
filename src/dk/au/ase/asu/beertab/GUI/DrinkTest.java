@@ -14,9 +14,11 @@ public class DrinkTest {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
+	private Drink d;
 
 	@Before
 	public void setUp() throws Exception {
+		d = new Drink("Vin",45);
 	}
 
 	@After
@@ -25,7 +27,7 @@ public class DrinkTest {
 
 	@Test
 	public void test_create() {
-		Drink d = new Drink("Vin",45);
+		
 		assertNotNull(d);
 		assertEquals(d.getName(),"Vin");
 		assertEquals(d.getPrice(),45);
@@ -36,6 +38,13 @@ public class DrinkTest {
 		assertNotNull(d);
 		assertEquals(d.getName(),"Vin");
 		assertEquals(d.getPrice(),45);
+	}
+	@Test
+	public void testChangePrice() {
+		d.changePrice(145);
+		assertEquals(145,d.getPrice());
+		d.changePrice(-100);
+		assertEquals(145,d.getPrice());
 	}
 
 }
