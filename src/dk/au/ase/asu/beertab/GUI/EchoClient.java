@@ -6,6 +6,11 @@ import java.net.UnknownHostException;
 
 public class EchoClient {
 
+	/**
+	 * @param args
+	 * @throws UnknownHostException
+	 * @throws IOException
+	 */
 	public static void main(String[] args) throws UnknownHostException, IOException {
 		// TODO Auto-generated method stub
 		Socket sck = new Socket("localhost",8090);
