@@ -73,7 +73,11 @@ public class BeerServer implements Runnable {
 
 	public String getDrink(String string) {
 		// TODO Auto-generated method stub
-		return drinks.get(0);
+		String res = "";
+		for (String s:drinks) {
+			if (s.equals(string)) res = s;
+		}
+		return res;
 	}
 
 }

@@ -36,8 +36,12 @@ public class NetworkTest {
 	@Test
 	public void test_addDrink() throws IOException, InterruptedException {
 		client.addDrink("Øl");
+		client.addDrink("Vin");
+		client.addDrink("Rom");
 		Thread.sleep(10);
 		assertNotNull(server.getDrink("Øl"));
-		//assertEquals((Integer)server.getPerson("Anders"),(Integer)0);
+		assertEquals(server.getDrink("Øl"),"Øl");
+		assertEquals(server.getDrink("Vin"),"Vin");
+		assertEquals(server.getDrink("Whisky"),"");
 	}
 }
