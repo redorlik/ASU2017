@@ -31,19 +31,27 @@ public class BeerServer implements Runnable {
 			OutputStream ot = sck.getOutputStream();
 			
 			while (true) {
-				System.out.println("Server Start");
 				String resp = br.readLine();
 				System.out.println("Server read message "+resp);
-				if (resp.startsWith("Add Person :")) {
-					String temp = resp.split(":")[1];
-					System.out.println(temp);
-					tab.put(temp,0);
-				}else if (resp.startsWith("add drink")) {
-					
-				}else if (resp.startsWith("cheers")) {
-					
-				}else {
-					ot.write("Error: No such command".getBytes());
+				String[] temp = resp.split(":");
+				Commands cmd = null;
+				
+				for (Commands p:Commands.values()) {
+					if (p.getCommand().equals(temp[0])) {
+						cmd = p;
+						break;
+					}		
+				}
+				switch (cmd) {
+					case Add_Person:
+						tab.put(temp[1],0);
+						break;
+					case Add_Drink:
+						break;
+					case Buy_drink:
+						break;
+					default:
+						ot.write("Error: No such command".getBytes());
 				}
 			}
 				
