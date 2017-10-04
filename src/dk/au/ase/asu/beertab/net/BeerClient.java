@@ -13,7 +13,7 @@ public class BeerClient {
 	}
 
 	public void addPerson(String string) throws IOException {
-		String str = "Add Person:"+string+"\n";
+		String str = Commands.Add_Person.getCommand()+":"+string+"\n";
 		sck.getOutputStream().write(str.getBytes());
 		
 	}
