@@ -10,12 +10,15 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketAddress;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 
 import dk.au.ase.asu.beertab.GUI.Person;
 
 public class BeerServer implements Runnable {
 	ServerSocket server;
 	private HashMap<String,Integer> tab = new HashMap<String, Integer>();
+	private List<String> drinks = new LinkedList<String>();
 	
 	public BeerServer(String string, int i) throws IOException {
 		server = new ServerSocket();
@@ -47,6 +50,7 @@ public class BeerServer implements Runnable {
 						tab.put(temp[1],0);
 						break;
 					case Add_Drink:
+						drinks.add(temp[1]);
 						break;
 					case Buy_drink:
 						break;
@@ -65,6 +69,11 @@ public class BeerServer implements Runnable {
 	public Integer getPerson(String string) {
 		// TODO Auto-generated method stub
 		return tab.get(string);
+	}
+
+	public String getDrink(String string) {
+		// TODO Auto-generated method stub
+		return drinks.get(0);
 	}
 
 }

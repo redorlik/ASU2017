@@ -11,8 +11,15 @@ import org.junit.Test;
 
 public class NetworkTest {
 
+	static BeerClient client;
+	static BeerServer server;
+	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		server = new BeerServer("localhost",5589);
+		Thread srv = new Thread(server);
+		srv.start();
+		client = new BeerClient("localhost",5589);
 	}
 
 	@Before
@@ -20,16 +27,17 @@ public class NetworkTest {
 	}
 
 	@Test
-	public void test() throws UnknownHostException, IOException, InterruptedException {
-		
-		BeerServer server = new BeerServer("localhost",5589);
-		Thread srv = new Thread(server);
-		srv.start();
-		BeerClient client = new BeerClient("localhost",5589);
-		//Thread.sleep(1000);
+	public void test_addPerson() throws UnknownHostException, IOException, InterruptedException {
 		client.addPerson("Anders");
-		Thread.sleep(1000);
+		Thread.sleep(10);
 		assertNotNull(server.getPerson("Anders"));
+		assertEquals((Integer)server.getPerson("Anders"),(Integer)0);
 	}
-
+	@Test
+	public void test_addDrink() throws IOException, InterruptedException {
+		client.addDrink("Øl");
+		Thread.sleep(10);
+		assertNotNull(server.getDrink("Øl"));
+		//assertEquals((Integer)server.getPerson("Anders"),(Integer)0);
+	}
 }

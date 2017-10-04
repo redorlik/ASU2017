@@ -15,6 +15,11 @@ public class BeerClient {
 	public void addPerson(String string) throws IOException {
 		String str = Commands.Add_Person.getCommand()+":"+string+"\n";
 		sck.getOutputStream().write(str.getBytes());
+	}
+
+	public void addDrink(String string) throws IOException {
+		String str = Commands.Add_Drink.getCommand()+":"+string+"\n";
+		sck.getOutputStream().write(str.getBytes());
 		
 	}
 
