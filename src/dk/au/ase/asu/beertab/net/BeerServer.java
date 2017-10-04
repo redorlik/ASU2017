@@ -17,7 +17,7 @@ import dk.au.ase.asu.beertab.GUI.Person;
 
 public class BeerServer implements Runnable {
 	ServerSocket server;
-	private HashMap<String,Integer> tab = new HashMap<String, Integer>();
+	private HashMap<String,HashMap> tab = new HashMap<String, HashMap>();
 	private List<String> drinks = new LinkedList<String>();
 	
 	public BeerServer(String string, int i) throws IOException {
@@ -47,12 +47,16 @@ public class BeerServer implements Runnable {
 				}
 				switch (cmd) {
 					case Add_Person:
-						tab.put(temp[1],0);
+						tab.put(temp[1],new HashMap());
 						break;
 					case Add_Drink:
 						drinks.add(temp[1]);
 						break;
 					case Buy_drink:
+						String[] args = temp[1].split(" ");
+						Integer tmp = (Integer) tab.get(args[0]).get(args[1]);
+						if (tmp == null) tab.get(args[0]).put(args[1],1);
+						else tab.get(args[0]).put(args[1],tmp+1);
 						break;
 					default:
 						ot.write("Error: No such command".getBytes());
@@ -66,7 +70,7 @@ public class BeerServer implements Runnable {
 		
 	}
 
-	public Integer getPerson(String string) {
+	public HashMap getPerson(String string) {
 		// TODO Auto-generated method stub
 		return tab.get(string);
 	}
@@ -78,6 +82,11 @@ public class BeerServer implements Runnable {
 			if (s.equals(string)) res = s;
 		}
 		return res;
+	}
+
+	public HashMap getTab(String string) {
+		
+		return tab.get(string);
 	}
 
 }

@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
+import java.util.HashMap;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -31,7 +32,7 @@ public class NetworkTest {
 		client.addPerson("Anders");
 		Thread.sleep(10);
 		assertNotNull(server.getPerson("Anders"));
-		assertEquals((Integer)server.getPerson("Anders"),(Integer)0);
+		assertEquals((HashMap)server.getPerson("Anders"),new HashMap<String,Integer>());
 	}
 	@Test
 	public void test_addDrink() throws IOException, InterruptedException {
@@ -43,5 +44,14 @@ public class NetworkTest {
 		assertEquals(server.getDrink("Øl"),"Øl");
 		assertEquals(server.getDrink("Vin"),"Vin");
 		assertEquals(server.getDrink("Whisky"),"");
+	}
+	@Test
+	public void test_buying() throws IOException, InterruptedException {
+		client.addPerson("Anders");
+		client.addDrink("Øl");
+		client.BuyDrink("Anders","Øl",1);
+		Thread.sleep(10);
+		assertNotNull(server.getTab("Anders"));
+		assertEquals(server.getTab("Anders").get("Øl"),1);
 	}
 }

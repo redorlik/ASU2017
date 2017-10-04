@@ -20,7 +20,12 @@ public class BeerClient {
 	public void addDrink(String string) throws IOException {
 		String str = Commands.Add_Drink.getCommand()+":"+string+"\n";
 		sck.getOutputStream().write(str.getBytes());
-		
+	}
+
+	public void BuyDrink(String person,String drink,Integer number) throws IOException {
+		String str = Commands.Buy_drink.getCommand()+":"+person+
+				" "+drink+" "+number+"\n";
+		sck.getOutputStream().write(str.getBytes());
 	}
 
 }
