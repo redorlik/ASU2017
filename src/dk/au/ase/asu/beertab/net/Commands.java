@@ -1,9 +1,9 @@
 package dk.au.ase.asu.beertab.net;
 
 public enum Commands {
-	Add_Person (Constants.a_person),
-	Add_Drink (Constants.a_drink),
-	Buy_drink (Constants.bought);
+	Add_Person ("Add Person"),
+	Add_Drink ("Add Drink"),
+	Buy_drink ("Bought");
 	
 	private final String command;
 	

@@ -50,8 +50,10 @@ public class NetworkTest {
 		client.addPerson("Anders");
 		client.addDrink("Øl");
 		client.BuyDrink("Anders","Øl",1);
+		client.BuyDrink("Anders","Vin",10);
 		Thread.sleep(10);
 		assertNotNull(server.getTab("Anders"));
 		assertEquals(server.getTab("Anders").get("Øl"),1);
+		assertEquals(server.getTab("Anders").get("Vin"),10);
 	}
 }

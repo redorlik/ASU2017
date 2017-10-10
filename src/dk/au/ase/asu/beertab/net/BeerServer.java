@@ -45,6 +45,7 @@ public class BeerServer implements Runnable {
 						break;
 					}		
 				}
+				int num;
 				switch (cmd) {
 					case Add_Person:
 						tab.put(temp[1],new HashMap());
@@ -55,8 +56,9 @@ public class BeerServer implements Runnable {
 					case Buy_drink:
 						String[] args = temp[1].split(" ");
 						Integer tmp = (Integer) tab.get(args[0]).get(args[1]);
-						if (tmp == null) tab.get(args[0]).put(args[1],1);
-						else tab.get(args[0]).put(args[1],tmp+1);
+						num = Integer.parseInt(args[2]);
+						if (tmp == null) tab.get(args[0]).put(args[1],num);
+						else tab.get(args[0]).put(args[1],tmp+num);
 						break;
 					default:
 						ot.write("Error: No such command".getBytes());
