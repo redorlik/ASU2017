@@ -5,6 +5,7 @@ public class RaceCondition implements Runnable{
 	private static String text="Hello World it is a beutiful day here in Herning.";
 	private  static String res;
 	private RaceCondition other;
+	private Object obj = new Object();
 
 	public RaceCondition() {
 		// TODO Auto-generated constructor stub
@@ -37,7 +38,8 @@ public class RaceCondition implements Runnable{
 		String[] textlist = text.split(" ");
 		other.method2(textlist);
 	}
-	public synchronized void method2(String[] textlist) {
+	public  void method2(String[] textlist) {
+		synchronized(obj) {
 		String res = "";
 		int xx = 0;
 		for (String x:textlist) {
@@ -47,6 +49,6 @@ public class RaceCondition implements Runnable{
 			}
 		}
 		System.out.println(res+" " + xx);
-		
+		}
 	}
 }
