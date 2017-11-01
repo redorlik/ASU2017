@@ -4,27 +4,42 @@ public class RaceCondition implements Runnable{
 
 	private static String text="Hello World it is a beutiful day here in Herning.";
 	private  static String res;
+	private RaceCondition other;
 
 	public RaceCondition() {
 		// TODO Auto-generated constructor stub
 	}
-
+	public void setOther(RaceCondition other) {
+		this.other = other;
+	}
 	public static void main(String[] args) {
 		RaceCondition thread1 = new RaceCondition();
 		RaceCondition thread2 = new RaceCondition();
 		RaceCondition thread3 = new RaceCondition();
+		thread1.setOther(thread2);
+		thread2.setOther(thread1);
 		new Thread(thread1).start();
 		new Thread(thread2).start();
-		new Thread(thread3).start();
 	}
 
 	@Override
 	public  void  run() {
 		// TODO Auto-generated method stub
-		res = "";
-		int xx = 0;
+		method1();
+		
+		
+		
+		
+	}
+	public synchronized void method1() {
+		
+		System.out.println("Hejsa fra tråd: "+Thread.currentThread());
 		String[] textlist = text.split(" ");
-		synchronized(RaceCondition.class) {
+		other.method2(textlist);
+	}
+	public synchronized void method2(String[] textlist) {
+		String res = "";
+		int xx = 0;
 		for (String x:textlist) {
 			res +=x+" ";
 			for (int i=0;i<10000;i++) {
@@ -32,7 +47,6 @@ public class RaceCondition implements Runnable{
 			}
 		}
 		System.out.println(res+" " + xx);
-		}
 		
 	}
 }
