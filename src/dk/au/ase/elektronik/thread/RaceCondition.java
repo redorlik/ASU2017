@@ -37,6 +37,7 @@ public class RaceCondition implements Runnable{
 		System.out.println("Hejsa fra tråd: "+Thread.currentThread());
 		String[] textlist = text.split(" ");
 		other.method2(textlist);
+		
 	}
 	public  void method2(String[] textlist) {
 		synchronized(obj) {
