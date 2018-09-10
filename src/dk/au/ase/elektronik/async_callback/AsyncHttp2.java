@@ -23,9 +23,12 @@ public class AsyncHttp2 {
 	private int port;
 	private static ServerSocket srv;
 	private static int i=0;
-
+	
 	public static void main(String[] args) {
 		AsyncHttp2 srver = null;
+		System.out.println("Hej 🧐😀 \u0001F600🍆");
+		System.out.println(Integer.toHexString("😀".codePointAt(0)));
+		String x = new String();
 		try {
 			srver = new AsyncHttp2(8785);
 		} catch (IOException e) {

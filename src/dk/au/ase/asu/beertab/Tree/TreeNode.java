@@ -1,6 +1,7 @@
 package dk.au.ase.asu.beertab.Tree;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 
 public class TreeNode<T extends Comparable> {
@@ -27,20 +28,20 @@ public class TreeNode<T extends Comparable> {
 	public void insert(T t) {
 		if (getValue() == null) {
 			this.value = t;
-		}
-		if (t.compareTo(getValue())>0) {
-			if (this.right == null) {
-				this.right = new TreeNode(t);
+		}else
+			if (t.compareTo(getValue())>0) {
+				if (this.right == null) {
+					this.right = new TreeNode(t);
+				}else {
+					this.right.insert(t);
+				}
 			}else {
-				this.right.insert(t);
+				if (this.left == null) {
+					this.left = new TreeNode(t);
+				}else {
+					this.left.insert(t);
+				}
 			}
-		}else {
-			if (this.left == null) {
-				this.left = new TreeNode(t);
-			}else {
-				this.left.insert(t);
-			}
-		}
 	}
 
 	TreeNode getRight() {
@@ -52,18 +53,42 @@ public class TreeNode<T extends Comparable> {
 		return this.left;
 	}
 
-	public void remove(int i) {
-		
+	public void remove(T i) {
+		 ArrayList<TreeNode> f = this.search(i);
 		
 	}
 
-	public TreeNode search(T i) {
-		if (getValue().equals(i)) return this;
+	public ArrayList<TreeNode> search(T i) {
+		ArrayList res;
+		if (getValue().equals(i)) {
+			res = new ArrayList<TreeNode>();
+			res.add(this);
+			return res;
+		}	
 		if (i.compareTo(getValue())>0) {
-			return this.getRight().search(i);
+			res = this.getRight().search(i);
+			res.add(this);
+			return res;
 		}else {
-			return this.getLeft().search(i);
+			res = this.getLeft().search(i);
+			res.add(this);
+			return res;
 		}
 		
+	}
+
+	public ArrayList<T> toList() {
+		ArrayList<T> res; 
+		if (this.left != null) {
+			res = this.getLeft().toList();
+		}else {
+			res = new ArrayList<T>();
+		}
+		res.add(getValue());
+		if (this.right != null) {
+			res.addAll(this.getRight().toList());
+		}
+		
+		return res;
 	}
 }

@@ -13,7 +13,7 @@ public class RaceCondition implements Runnable{
 
 	public RaceCondition() {
 		// TODO Auto-generated constructor stub
-		sem.release();
+		
 		System.out.println(sem.availablePermits());
 	}
 	public void setOther(RaceCondition other) {

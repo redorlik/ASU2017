@@ -50,13 +50,14 @@ public class TreeNodeTest {
 		l.addAll(Arrays.asList(new Integer[] {3,4,2,10,9}));
 		TreeNode<Integer> root = new TreeNode<Integer>(l);
 		root.remove(9);
+		assertEquals(root.toList().toString(),"[2,3,4,10]");
 	}
 	@Test
 	public void testSearch() {
 	ArrayList<Integer> l = new ArrayList<Integer>();
 	l.addAll(Arrays.asList(new Integer[] {3,4,2,10,9}));
 	TreeNode<Integer> root = new TreeNode<Integer>(l);
-	TreeNode<Integer> res = root.search(9);
-	assertEquals(res.getValue(),(Integer) 9);
+	ArrayList<TreeNode> res = root.search(9);
+	assertEquals(res.get(0).getValue(),(Integer) 9);
 	}
 }

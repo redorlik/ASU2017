@@ -6,10 +6,12 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class SimpleWebserver {
 
-	
+	private int threads = 10;
 	private int port;
 	private ServerSocket server;
 
@@ -24,12 +26,16 @@ public class SimpleWebserver {
 		}
 	}
 	
-	public void acceptLoop() {
+	public void acceptLoop() throws InterruptedException {
+		ExecutorService pool = Executors.newScheduledThreadPool(threads);
+	
 		while(true){
 			try {
 				Socket sck = server.accept();
 				HttpHandler handler = new HttpHandler(sck);
-				handler.handleHttp();
+				//Thread traad = new Thread(handler);
+				//traad.start();
+				pool.execute(handler);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -41,7 +47,12 @@ public class SimpleWebserver {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		SimpleWebserver srv = new SimpleWebserver(9999);
-		srv.acceptLoop();
+		try {
+			srv.acceptLoop();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

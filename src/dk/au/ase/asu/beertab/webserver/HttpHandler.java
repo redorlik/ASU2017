@@ -6,14 +6,14 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.Socket;
 
-public class HttpHandler {
+public class HttpHandler implements Runnable {
 
 	private Socket sck;
 	public HttpHandler(Socket sck) {
 		// TODO Auto-generated constructor stub
 		this.sck = sck;
 	}
-	public void handleHttp() {
+	public void handleHttp() throws InterruptedException {
 		try {
 			BufferedReader inp_stream = new BufferedReader(
 							new InputStreamReader(
@@ -47,12 +47,23 @@ public class HttpHandler {
 				
 				String body = "To be or not to be , that is the question.";
 				String str = stat+head+"\r\n"+ body;
+				Thread.sleep(100);
 				OutputStream output = sck.getOutputStream();
 				output.write(str.getBytes());
 				output.close();
 			}
 			
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	@Override
+	public void run() {
+		try {
+			handleHttp();
+		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
