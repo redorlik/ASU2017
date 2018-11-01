@@ -19,6 +19,7 @@ public class BeerServer implements Runnable {
 	ServerSocket server;
 	private HashMap<String,HashMap> tab = new HashMap<String, HashMap>();
 	private List<String> drinks = new LinkedList<String>();
+	private boolean alive = true;
 	
 	public BeerServer(String string, int i) throws IOException {
 		server = new ServerSocket();
@@ -33,7 +34,7 @@ public class BeerServer implements Runnable {
 			BufferedReader br = new BufferedReader(st);
 			OutputStream ot = sck.getOutputStream();
 			
-			while (true) {
+			while (alive ) {
 				String resp = br.readLine();
 				System.out.println("Server read message "+resp);
 				String[] temp = resp.split(":");
@@ -53,13 +54,19 @@ public class BeerServer implements Runnable {
 					case Add_Drink:
 						drinks.add(temp[1]);
 						break;
-					case Buy_drink:
+					case Buy_drink:{
 						String[] args = temp[1].split(" ");
-						Integer tmp = (Integer) tab.get(args[0]).get(args[1]);
+						HashMap pers_tab = tab.get(args[0]);
+						Integer tmp = null;
+						if (pers_tab == null) {
+							tab.put(args[0],new HashMap());
+							pers_tab = tab.get(args[0]);
+						}
+						tmp = (Integer) pers_tab.get(args[1]);
 						num = Integer.parseInt(args[2]);
 						if (tmp == null) tab.get(args[0]).put(args[1],num);
 						else tab.get(args[0]).put(args[1],tmp+num);
-						break;
+						break;}
 					default:
 						ot.write("Error: No such command".getBytes());
 				}
@@ -89,6 +96,11 @@ public class BeerServer implements Runnable {
 	public HashMap getTab(String string) {
 		
 		return tab.get(string);
+	}
+
+	public void kill() {
+		alive = false;
+		
 	}
 
 }

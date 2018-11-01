@@ -11,7 +11,7 @@ import java.util.concurrent.Executors;
 
 public class SimpleWebserver {
 
-	private int threads = 10;
+	private int threads = 100;
 	private int port;
 	private ServerSocket server;
 

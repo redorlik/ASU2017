@@ -8,9 +8,6 @@ import javax.swing.JEditorPane;
 import java.awt.BorderLayout;
 import javax.swing.JTextPane;
 
-import com.teamdev.jxbrowser.chromium.swing.BrowserView;
-import com.teamdev.jxbrowser.chromium.Browser;
-
 public class SwingURL {
 
 	private JFrame frame;

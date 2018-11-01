@@ -75,7 +75,7 @@ public class GUI {
 	}
 	
 	DefaultTableModel myData = new DefaultTableModel(
-			new Object[][] {{"Name\\Beverage"}
+			new Object[][] {{"Name\\Beverage","ff"},{"yy","ii"}
 			},
 			new String[] {"test"
 			}
@@ -105,9 +105,9 @@ public class GUI {
 //		frame.getContentPane().add(lblBeerTab, BorderLayout.NORTH);
 		
 		table = new JTable(){
-			public boolean isCellEditable(int row, int column){
-				return false;
-			}
+			//public boolean isCellEditable(int row, int column){
+			//	return false;
+			//}
 		};
 		
 		table.setGridColor(Color.BLACK);
@@ -184,6 +184,9 @@ public class GUI {
 		
 		mntmFirstItem = new JMenuItem("First Item");
 		mnTools.add(mntmFirstItem);
+		myData.addColumn("");
+		String[] dummy = {"",""};
+		myData.addRow(dummy);
 		table.setModel(myData);
 		frame.getContentPane().add(table, BorderLayout.CENTER);
 		

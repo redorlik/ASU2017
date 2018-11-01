@@ -10,23 +10,30 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class DrinkTest {
-
+	private static Drink d;
+	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		d = new Drink("Vin",45);
+		System.out.println("BeforeClass");
 	}
-	private Drink d;
+	
 
 	@Before
 	public void setUp() throws Exception {
-		d = new Drink("Vin",45);
+		System.out.println("Before");
 	}
 
 	@After
 	public void tearDown() throws Exception {
 	}
-
+	@Test
+	public void testStatic() throws NegativePriceException {
+		d.changePrice(100);
+		assertEquals(100,d.getPrice());
+	}
 	@Test(expected=NegativePriceException.class)
-	public void test_create() throws NegativePriceException {
+	public void test_create() throws NegativePriceException   {
 		
 		assertNotNull(d);
 		assertEquals(d.getName(),"Vin");

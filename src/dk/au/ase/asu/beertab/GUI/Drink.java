@@ -18,8 +18,13 @@ public class Drink {
 
 	private void setPrice(BigDecimal price) throws NegativePriceException {
 		// TODO Auto-generated method stub
+		
 		if (price.intValue()>0) this.price = price;
-		else throw new NegativePriceException();
+		else {
+			NegativePriceException exc = new NegativePriceException();
+			
+			throw exc;
+		}
 	}
 
 	public int getPrice() {
