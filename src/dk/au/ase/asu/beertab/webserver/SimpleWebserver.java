@@ -27,7 +27,7 @@ public class SimpleWebserver {
 	}
 	
 	public void acceptLoop() throws InterruptedException {
-		ExecutorService pool = Executors.newScheduledThreadPool(threads);
+		ExecutorService pool = Executors.newFixedThreadPool(threads);
 	
 		while(true){
 			try {

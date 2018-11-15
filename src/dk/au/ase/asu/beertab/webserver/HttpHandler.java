@@ -5,15 +5,17 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.util.concurrent.Callable;
 
-public class HttpHandler implements Runnable {
+public class HttpHandler implements Callable,Runnable {
 
 	private Socket sck;
 	public HttpHandler(Socket sck) {
 		// TODO Auto-generated constructor stub
 		this.sck = sck;
 	}
-	public void handleHttp() throws InterruptedException {
+	public String handleHttp() throws InterruptedException {
+		String err = "All ok";
 		try {
 			BufferedReader inp_stream = new BufferedReader(
 							new InputStreamReader(
@@ -56,7 +58,9 @@ public class HttpHandler implements Runnable {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			err = e.getMessage();
 		}
+		return err;
 		
 	}
 	@Override
@@ -68,6 +72,19 @@ public class HttpHandler implements Runnable {
 			e.printStackTrace();
 		}
 		
+	}
+	@Override
+	public String call() throws Exception {
+		// TODO Auto-generated method stub
+		String err = "Alt er OK";
+		try {
+			handleHttp();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			err = e.getMessage();
+		}
+		return err;
 	}
 
 }
